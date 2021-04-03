@@ -6,6 +6,18 @@ Los conceptos no se explican demasiado, se debe considerar más como una "cheat 
 Todos los comandos deben ejecutarse desde el directorio raíz del repositorio.
 Las palabras entre <> se deben reemplazar por el nombre del elemento que describen.
 
+## Configuración inicial
+
+Para poder realizar commits, Git necesita que su usuario registre su nombre y correo.
+
+    git config --global user.name "<nombre>"
+    git config --global user.email "<correo>"
+
+## Verificar configuración inicial
+
+    git config user.name
+    git config user.email
+
 ## Inicializar un repositorio con la rama "master" (por defecto)
 
     git init
@@ -18,13 +30,11 @@ Las palabras entre <> se deben reemplazar por el nombre del elemento que describ
 
     git clone <url>
 
-La copia se alamacenará en la carpeta actual.
+La copia se almacenará en la carpeta actual.
 
-## Almacenar una copia local en una carpeta
+## Almacenar una copia local en otra carpeta
 
     git clone <url> <carpeta>
-
-    git clone <usuario>@<host>:ruta
 
 ## Agregar cambios hechos a archivos al próximo commit
 
@@ -45,13 +55,14 @@ Hay 2 formas de hacerlo.
 
     git add .
 
-    git add -all
+    git add --all
 
 ## Hacer un commit con un mensaje
 
     git commit -m "<mensaje del commit>"
 
-El commit almacena todos los cambios marcados como "staged" al momento de realizarlo.
+El commit confirma todos los cambios marcados como "staged" al momento de realizarlo.
+El mensaje debería describir en qué consistió el cambio.
 
 ## Ver el historial de commits realizados
 
@@ -236,7 +247,7 @@ Las etiquetas generalmente se usan para marcar versiones.
 
     gitk
 
-## Iniciar un repositorio desde 0 y subirlo a GitHub
+## Iniciar un repositorio desde cero y subirlo a GitHub
 
 Paso 1: Inicializar el repositorio local
 
@@ -255,3 +266,52 @@ Paso 3: Añadir el repositorio remoto y subir los cambios
     git push --set-upstream origin main
 
 Paso 4: Iniciar sesión en los logon que aparecerán
+
+## Hacer que Git recuerde las credenciales del inicio de sesión en GitHub
+
+Existen muchos métodos, pero el más seguro es usar SSH.
+
+Paso 1: Generar una nueva clave SSH
+
+     ssh-keygen -t ed25519 -C "<correo del usuario>"
+
+Se debe pulsar Intro cuando pregunte donde guardarlo para que se guarde en la ubicación por defecto.
+Después, se ingresa la passphrase que actúa como contraseña.
+Es importante no olvidar esta contraseña.
+
+Paso 2: Copiar el siguiente texto y guardarlo como un archivo de nombre ".profile" en la carpeta raíz de tu usuario del sistema operativo.
+
+```
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
+
+unset env
+```
+
+Paso 3: Volver a iniciar Git Bash e ingresar la passphrase que se registró anteriormente.
+
+Paso 4: Copiar la clave SSH
+
+clip < ~/.ssh/id_ed25519.pub
+
+Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH
+
+Es importante recordar que esta clave es muy importante.
+No se debe compartir con nadie.
