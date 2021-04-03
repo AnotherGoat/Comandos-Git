@@ -6,7 +6,7 @@ Los conceptos no se explican demasiado, se debe considerar más como una "cheat 
 Todos los comandos deben ejecutarse desde el directorio raíz del repositorio.
 Las palabras entre <> se deben reemplazar por el nombre del elemento que describen.
 
-## Configuración inicial
+## Hacer la configuración inicial
 
 Para poder realizar commits, Git necesita que su usuario registre su nombre y correo.
 
@@ -18,13 +18,22 @@ Para poder realizar commits, Git necesita que su usuario registre su nombre y co
     git config user.name
     git config user.email
 
-## Inicializar un repositorio con la rama "master" (por defecto)
+## Inicializar un repositorio
 
     git init
+
+Por defecto, este repositorio se iniciará con la rama ```master```.
 
 ## Inicializar un repositorio con otra rama
 
     git init -b <rama>
+
+## Cambiar el nombre de rama predeterminado
+
+    git config --global init.defaultBranch <rama>
+
+Esto cambiará el nombre de la rama creada al usar ```git init```.
+Un ejemplo de uso es para cambiar el valor por defecto ```master``` a ```main```, ya que gran parte de la comunidad de Git ha empezado a migrar a este nuevo nombre.
 
 ## Almacenar una copia local de un repositorio en internet
 
@@ -36,18 +45,19 @@ La copia se almacenará en la carpeta actual.
 
     git clone <url> <carpeta>
 
-## Agregar cambios hechos a archivos al próximo commit
+## Agregar cambios hechos a archivos
 
     git add <archivo>
 
-Los archivos añadidos con add serán marcados como "staged".
+Los archivos añadidos con ```git add``` serán marcados como staged.
+Para confirmarlos, se usa el comando ```git commit```, que se explica más adelante.
 
 ## Agregar todos los archivos dentro de una carpeta
 
     git add <directorio>
 
 No se pueden agregar directorios vacíos.
-Los directorios deben tener archivos para agregarlos.
+Git sólo registra cambios hechos a archivos y añade directorios sólo cuando tienen archivos dentro de ellos.
 
 ## Agregar todos los cambios actuales
 
@@ -146,11 +156,17 @@ Se debre crear el siguiente archivo en la carpeta raíz o donde están los archi
 
 El archivo se modifica con cualquier editor de texto y los nombres de archivos o directorios dentro de él serán ignorados por Git.
 
+Por ejemplo, para hacer que Git ignore el archivo ```archivo.txt``` y todos los archivos de la carpeta ```test```, el .gitignore debe tener el siguiente contenido.
+
+    archivo.txt
+    test
+
 ## Borrar un archivo ignorado del repositorio, sin removerlo del disco
 
     git rm --cached <archivo>
 
-Con archivo ignorado se refiere a los que aparecen en .gitignore, pero existen en el último commit.
+Con archivo ignorado se refiere a los que aparecen en .gitignore, pero tenían una versión guardada en el último commit.
+Al igual que ```git add```, esta operación será confirmada en el próximo commit.
 
 ## Crear una rama
 
@@ -166,7 +182,7 @@ La rama creada será igual a la de origen y no estará activa.
 
     git checkout -b <rama>
 
-Básicamente es lo mismo que branch seguido de checkout.
+Básicamente es lo mismo que ```git branch``` seguido de ```git checkout```.
 
 ## Ver la rama activa
 
@@ -271,15 +287,15 @@ Paso 4: Iniciar sesión en los logon que aparecerán
 
 Existen muchos métodos, pero el más seguro es usar SSH.
 
-Paso 1: Generar una nueva clave SSH
+Paso 1: Generar una nueva clave SSH en base al correo electrónico.
 
      ssh-keygen -t ed25519 -C "<correo del usuario>"
 
 Se debe pulsar Intro cuando pregunte donde guardarlo para que se guarde en la ubicación por defecto.
-Después, se ingresa la passphrase que actúa como contraseña.
-Es importante no olvidar esta contraseña.
+Después, se ingresa la passphrase que actuará como una contraseña.
+Es importante no olvidar la passphrase.
 
-Paso 2: Copiar el siguiente texto y guardarlo como un archivo de nombre ".profile" en la carpeta raíz de tu usuario del sistema operativo.
+Paso 2: Copiar el siguiente texto y guardarlo como un archivo de nombre ```.profile``` en la carpeta raíz de tu usuario del sistema operativo.
 
 ```
 env=~/.ssh/agent.env
@@ -309,7 +325,7 @@ Paso 3: Volver a iniciar Git Bash e ingresar la passphrase que se registró ante
 
 Paso 4: Copiar la clave SSH
 
-clip < ~/.ssh/id_ed25519.pub
+     clip < ~/.ssh/id_ed25519.pub
 
 Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH
 
