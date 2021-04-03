@@ -6,6 +6,16 @@ Los conceptos no se explican demasiado, se debe considerar más como una "cheat 
 Todos los comandos deben ejecutarse desde el directorio raíz del repositorio.
 Las palabras entre <> se deben reemplazar por el nombre del elemento que describen.
 
+## Ver una pequeña introducción a Git
+
+    git
+
+## Abrir documentación sobre un comando
+
+    git help <comando>
+
+Esto abrirá la documentación sobre el comando en el navegador predefinido.
+
 ## Hacer la configuración inicial
 
 Para poder realizar commits, Git necesita que su usuario registre su nombre y correo.
@@ -17,6 +27,10 @@ Para poder realizar commits, Git necesita que su usuario registre su nombre y co
 
     git config user.name
     git config user.email
+
+## Iniciar la interfaz gráfica
+
+    gitk
 
 ## Inicializar un repositorio
 
@@ -61,7 +75,7 @@ Git sólo registra cambios hechos a archivos y añade directorios sólo cuando t
 
 ## Agregar todos los cambios actuales
 
-Hay 2 formas de hacerlo.
+Existen 2 formas de hacerlo.
 
     git add .
 
@@ -107,13 +121,24 @@ También mostrará los cambios "staged", los archivos que han recibido cambios p
 
 Esto inicia un menú para manejar los cambios.
 
+## Hacer un commit con todos los cambios hechos a archivos conocidos
+
+Existen 2 formas de hacerlo. No es necesario usar ```git add``` de antemano.
+
+    git commit -a -m "<mensaje del commit>"
+
+    git commit --all -m "<mensaje del commit>"
+
+Con "archivos conocidos" se refiere a los archivos que ya eran parte del repositorio en el último commit realizado y que tuvieron cambios desde la realización de éste.
+En otras palabras, los archivos nuevos serán ignorados en este commit.
+
 ## Ver todos los cambios en detalle, incluyendo los no registrados
 
     git diff
 
 Se debe pulsar Ctrl+C para salir.
 
-## Ver los cambios "staged" en detalle
+## Ver los cambios marcados como "staged" en detalle
 
     git diff --staged
 
@@ -148,9 +173,11 @@ Se debe pulsar Ctrl+C para salir.
 
     git rm <archivo>
 
+Esto sólo funciona con los archivos que están presentes en el último commit realizado.
+
 ## Hacer que Git ignore archivos
 
-Se debre crear el siguiente archivo en la carpeta raíz o donde están los archivos que se quieren ignorar.
+Se debe crear el siguiente archivo en la carpeta raíz o donde están los archivos que se quieren ignorar.
 
     .gitignore
 
@@ -165,7 +192,7 @@ Por ejemplo, para hacer que Git ignore el archivo ```archivo.txt``` y todos los 
 
     git rm --cached <archivo>
 
-Con archivo ignorado se refiere a los que aparecen en .gitignore, pero tenían una versión guardada en el último commit.
+Con archivo ignorado se refiere a los que aparecen en ```.gitignore```, pero tenían una versión guardada en el último commit.
 Al igual que ```git add```, esta operación será confirmada en el próximo commit.
 
 ## Crear una rama
@@ -227,7 +254,7 @@ Se debe tener cuidado al momento de usarlo.
 
     git remote add origin <url>
 
-Las ramas remotas tendrán el nombre origin/<rama>.
+Las ramas remotas tendrán el nombre ```origin/<rama>```.
 
 ## Ver el repositorio remoto
 
@@ -251,21 +278,13 @@ Las etiquetas generalmente se usan para marcar versiones.
 
     git tag
 
-## Revisar el repositorio en una etiqueta
+## Revisar el repositorio en el estado que tenía en una etiqueta
 
     git checkout <etiqueta>
 
-## Enviar etiquetas al repositorio remoto
-
-    git push --tags
-
-## Iniciar la interfaz gráfica
-
-    gitk
-
 ## Iniciar un repositorio desde cero y subirlo a GitHub
 
-Paso 1: Inicializar el repositorio local
+Paso 1: Inicializar el repositorio local.
 
     git init
     git add .
@@ -276,12 +295,12 @@ En GitHub, main es el nombre por defecto de la rama principal, en vez de master.
 
 Paso 2: Crear el repositorio en GitHub y copiar su URL.
 
-Paso 3: Añadir el repositorio remoto y subir los cambios
+Paso 3: Añadir el repositorio remoto y subir los cambios.
 
     git remote add origin <URL>
-    git push --set-upstream origin main
+    git push -u origin main
 
-Paso 4: Iniciar sesión en los logon que aparecerán
+Paso 4: Iniciar sesión en los logon que aparecerán.
 
 ## Hacer que Git recuerde las credenciales del inicio de sesión en GitHub
 
@@ -323,11 +342,35 @@ unset env
 
 Paso 3: Volver a iniciar Git Bash e ingresar la passphrase que se registró anteriormente.
 
-Paso 4: Copiar la clave SSH
+Paso 4: Copiar la clave SSH.
 
      clip < ~/.ssh/id_ed25519.pub
 
-Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH
+Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH.
 
 Es importante recordar que esta clave es muy importante.
 No se debe compartir con nadie.
+
+## Subir cualquier cambio hecho a la rama local después de conectar el repositorio remoto
+
+    git push
+
+Este cambio sólo sincronizará la rama activa.
+Ya no es necesario usar ```git push -u```, porque este comando hizo que se relacionen las ramas locales con las remotas automáticamente.
+
+## Recibir cambios desde el repositorio remoto
+
+    git fetch
+
+Cualquier conflicto que se encuentre deberá ser solucionado usando ```git add```.
+
+## Recibir cambios desde el repositorio remoto y fusionar
+
+    git pull
+
+Los conflictos se solucionarán automáticamente, pero puede causar errores.
+Básicamente es un ```git fetch``` seguido de un ```git merge```.
+
+## Enviar etiquetas al repositorio remoto
+
+    git push --tags
