@@ -6,6 +6,13 @@ Los conceptos no se explican demasiado, se debe considerar más como una "cheat 
 Todos los comandos deben ejecutarse desde el directorio raíz del repositorio.
 Las palabras entre <> se deben reemplazar por el nombre del elemento que describen.
 
+## Instalar Git
+
+Se debe descargar el instalador desde el [sitio web oficial](https://www.git-scm.com/downloads).
+Para asegurarse de que se instaló correctamente, se puede usar el siguiente comando.
+
+    git --version
+
 ## Ver una pequeña introducción a Git
 
     git
@@ -58,6 +65,17 @@ La copia se almacenará en la carpeta actual.
 ## Almacenar una copia local en otra carpeta
 
     git clone <url> <carpeta>
+
+## Clonar usando SSH
+
+    git clone <usuario>@<host>:<ruta>
+
+## Hacer la configuración para el repositorio actual
+
+    git config --local user.name "<nombre>"
+    git config --local user.email "<correo>"
+
+Esta configuración se guardará como local y sobreescribe la configuración global (sólo para los repositorios donde se haya configurado).
 
 ## Agregar cambios hechos a archivos
 
@@ -351,13 +369,6 @@ Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave
 Es importante recordar que esta clave es muy importante.
 No se debe compartir con nadie.
 
-## Subir cualquier cambio hecho a la rama local después de conectar el repositorio remoto
-
-    git push
-
-Este cambio sólo sincronizará la rama activa.
-Ya no es necesario usar ```git push -u```, porque este comando hizo que se relacionen las ramas locales con las remotas automáticamente.
-
 ## Recibir cambios desde el repositorio remoto
 
     git fetch
@@ -371,6 +382,25 @@ Cualquier conflicto que se encuentre deberá ser solucionado usando ```git add``
 Los conflictos se solucionarán automáticamente, pero puede causar errores.
 Básicamente es un ```git fetch``` seguido de un ```git merge```.
 
+## Subir un cambio de la rama local al repositorio remoto y sincronizar
+
+Se recomienda usar ```git fetch``` o ```git pull``` antes de ```git push```, para evitar conflictos.
+
+    git push -u
+
+Esto hará que se suban los cambios locales y hace que se relacionen las ramas locales con las remotas automáticamente.
+
+## Subir cualquier cambio hecho a la rama local después de conectar el repositorio remoto
+
+    git push
+
+Este cambio sólo subirá los cambios de la rama activa.
+Si es la primera vez que se suben cambios, se recomienda usar ```git push -u```.
+
 ## Enviar etiquetas al repositorio remoto
 
     git push --tags
+
+## Enviar todas las ramas y etiquetas
+
+    git push --all
