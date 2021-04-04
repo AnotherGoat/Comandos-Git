@@ -384,11 +384,10 @@ Básicamente es un ```git fetch``` seguido de un ```git merge```.
 
 ## Subir un cambio de la rama local al repositorio remoto y sincronizar
 
-Se recomienda usar ```git fetch``` o ```git pull``` antes de ```git push```, para evitar conflictos.
-
     git push -u
 
 Esto hará que se suban los cambios locales y hace que se relacionen las ramas locales con las remotas automáticamente.
+Se recomienda usar ```git fetch``` o ```git pull``` antes de ```git push```, especialmente si se está trabajando con otras personas.
 
 ## Subir cualquier cambio hecho a la rama local después de conectar el repositorio remoto
 
