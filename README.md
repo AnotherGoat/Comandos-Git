@@ -270,21 +270,22 @@ Se debe tener cuidado al momento de usarlo.
 
 ## Comparar 2 commits
 
-    git diff <id del commit 1> <id del commit 2>
+    git diff <sha del commit 1> <sha del commit 2>
 
-El id del commit es el que aparece al usar ```git log```.
+El sha del commit es el que aparece al usar ```git log```.
+Se puede usar el sha corto o el sha largo, pero se recomienda usar el largo si es posible.
 
 ## Regresar a un commit pasado temporalmente
 
-    git checkout <id del commit>
+    git checkout <sha del commit>
 
 En este estado, no se pueden hacer commits.
 
 ## Regresar a un commit pasado y crear una rama nueva
 
-    git checkout -b <rama> <id del commit>
+    git checkout -b <rama> <sha del commit>
 
-Esto permite hacer commits en una rama nueva que tendrá como último commit el del id que se le entregó.
+Esto permite hacer commits en una rama nueva que tendrá como último commit el del sha que se le entregó.
 
 ## Conectar un repositorio remoto a uno local
 
@@ -306,7 +307,7 @@ Las ramas remotas tendrán el nombre ```origin/<rama>```.
 
 ## Añadir una etiqueta
 
-    git tag <etiqueta> <id del commit>
+    git tag <etiqueta> <sha del commit>
 
 Las etiquetas generalmente se usan para marcar versiones.
 
@@ -421,3 +422,29 @@ Si es la primera vez que se suben cambios, se recomienda usar ```git push -u```.
 ## Enviar todas las ramas y etiquetas
 
     git push --all
+
+## Revertir el repositorio local a un commit todavía no subido al repositorio remoto
+
+    git reset --hard <sha del commit>
+
+Esto eliminará todos los cambios locales.
+No se debe usar si todavía se tiene trabajo que se quiere mantener.
+
+## Deshacer un commit subido al repositorio remoto
+
+    git revert <sha del commit>
+
+Esto hará un commit que deshace los cambios.
+
+## Deshacer múltiples commits en commits separados
+
+    git revert <sha del commit 1> <sha del commit 2> ...
+
+Cada sha proporcionado creará su propio commit de reversión.
+
+## Deshacer múltiples commits en un mismo commit
+
+    git revert --no-commit <sha del commit 1> <sha del commit 2> ...
+    git commit -m "<mensaje del commit>"
+
+Esto permite juntar muchos ```git revert``` en un mismo commit.
