@@ -110,9 +110,19 @@ El mensaje debería describir en qué consistió el cambio.
 
     git log
 
-## Ver el historial de commits sin detalles
+## Salir de una lista larga de información
+
+Si Git tiene demasiada información que mostrar con comandos como ```git log```, entonces no podrá mostrarla toda en pantalla al mismo tiempo.
+
+Se puede pulsar Intro para mostrar la próxima línea, siempre que no aparezca ```(END)``` al final.
+
+Para salir, se debe escribir ```q``` en el terminal.
+
+## Ver el historial de commits compacto
 
     git log --oneline
+
+Esto reducirá los detalles que se muestran sobre cada commit.
 
 ## Agregar archivos de cierta extensión en el directorio actual
 
@@ -154,13 +164,9 @@ En otras palabras, los archivos nuevos serán ignorados en este commit.
 
     git diff
 
-Se debe pulsar Ctrl+C para salir.
-
 ## Ver los cambios marcados como "staged" en detalle
 
     git diff --staged
-
-Se debe pulsar Ctrl+C para salir.
 
 ## Deshacer el último commit local y mantener los cambios como "staged"
 
@@ -177,15 +183,13 @@ Se debe pulsar Ctrl+C para salir.
 ## Añadir archivos al último commit
 
     git add <archivo>
-    git commit --amend -m "<Mensaje nuevo>"
+    git commit --amend -m "<mensaje nuevo>"
 
 El mensaje anterior se sobreescribirá.
 
 ## Ver el historial detallado de cambios de un archivo
 
     git blame <archivo>
-
-Se debe pulsar Ctrl+C para salir.
 
 ## Borrar un archivo de Git y del disco
 
@@ -267,6 +271,20 @@ Se debe tener cuidado al momento de usarlo.
 ## Comparar 2 commits
 
     git diff <id del commit 1> <id del commit 2>
+
+El id del commit es el que aparece al usar ```git log```.
+
+## Regresar a un commit pasado temporalmente
+
+    git checkout <id del commit>
+
+En este estado, no se pueden hacer commits.
+
+## Regresar a un commit pasado y crear una rama nueva
+
+    git checkout -b <rama> <id del commit>
+
+Esto permite hacer commits en una rama nueva que tendrá como último commit el del id que se le entregó.
 
 ## Conectar un repositorio remoto a uno local
 
