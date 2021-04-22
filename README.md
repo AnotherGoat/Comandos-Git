@@ -11,15 +11,21 @@ Las palabras entre <> se deben reemplazar por el nombre del elemento que describ
 Se debe descargar el instalador desde el [sitio web oficial](https://www.git-scm.com/downloads).
 Para asegurarse de que se instaló correctamente, se puede usar el siguiente comando.
 
-    git --version
+```
+git --version
+```
 
 ## Ver una pequeña introducción a Git
 
-    git
+```
+git
+```
 
 ## Abrir documentación sobre un comando
 
-    git help <comando>
+```
+git help <comando>
+```
 
 Esto abrirá la documentación sobre el comando en el navegador predefinido.
 
@@ -27,66 +33,90 @@ Esto abrirá la documentación sobre el comando en el navegador predefinido.
 
 Para poder realizar commits, Git necesita que su usuario registre su nombre y correo.
 
-    git config --global user.name "<nombre>"
-    git config --global user.email "<correo>"
+```
+git config --global user.name "<nombre>"
+git config --global user.email "<correo>"
+```
 
 ## Verificar configuración inicial
 
-    git config user.name
-    git config user.email
+```
+git config user.name
+git config user.email
+```
 
 ## Iniciar la interfaz gráfica
 
-    gitk
+```
+gitk
+```
 
 ## Inicializar un repositorio
 
-    git init
+```
+git init
+```
 
 Por defecto, este repositorio se iniciará con la rama ```master```.
 
 ## Inicializar un repositorio con otra rama
 
-    git init -b <rama>
+```
+git init -b <rama>
+```
 
 ## Cambiar el nombre de rama predeterminado
 
-    git config --global init.defaultBranch <rama>
+```
+git config --global init.defaultBranch <rama>
+```
 
 Esto cambiará el nombre de la rama creada al usar ```git init```.
 Un ejemplo de uso es para cambiar el valor por defecto ```master``` a ```main```, ya que gran parte de la comunidad de Git ha empezado a migrar a este nuevo nombre.
 
 ## Almacenar una copia local de un repositorio en internet
 
-    git clone <url>
+```
+git clone <url>
+```
 
 La copia se almacenará en la carpeta actual.
 
 ## Almacenar una copia local en otra carpeta
 
-    git clone <url> <carpeta>
+```
+git clone <url> <carpeta>
+```
 
 ## Clonar usando SSH
 
-    git clone <usuario>@<host>:<ruta>
+```
+git clone <usuario>@<host>:<ruta>
+```
 
 ## Hacer la configuración para el repositorio actual
 
-    git config --local user.name "<nombre>"
-    git config --local user.email "<correo>"
+```
+git config --local user.name "<nombre>"
+git config --local user.email "<correo>"
+```
 
 Esta configuración se guardará como local y sobreescribe la configuración global (sólo para los repositorios donde se haya configurado).
 
 ## Agregar cambios hechos a archivos
 
-    git add <archivo>
+```
+git add <archivo>
+```
 
 Los archivos añadidos con ```git add``` serán marcados como staged.
 Para confirmarlos, se usa el comando ```git commit```, que se explica más adelante.
 
 ## Agregar todos los archivos dentro de una carpeta
 
-    git add <directorio>
+```
+git add <directorio>
+```
 
 No se pueden agregar directorios vacíos.
 Git sólo registra cambios hechos a archivos y añade directorios sólo cuando tienen archivos dentro de ellos.
@@ -95,20 +125,28 @@ Git sólo registra cambios hechos a archivos y añade directorios sólo cuando t
 
 Existen 2 formas de hacerlo.
 
-    git add .
+```
+git add .
+```
 
-    git add --all
+```
+git add --all
+```
 
 ## Hacer un commit con un mensaje
 
-    git commit -m "<mensaje del commit>"
+```
+git commit -m "<mensaje del commit>"
+```
 
 El commit confirma todos los cambios marcados como "staged" al momento de realizarlo.
 El mensaje debería describir en qué consistió el cambio.
 
 ## Ver el historial de commits realizados
 
-    git log
+```
+git log
+```
 
 ## Salir de una lista larga de información
 
@@ -120,32 +158,44 @@ Para salir, se debe escribir ```q``` en el terminal.
 
 ## Ver el historial de commits compacto
 
-    git log --oneline
+```
+git log --oneline
+```
 
 Esto reducirá los detalles que se muestran sobre cada commit.
 
 ## Agregar archivos de cierta extensión en el directorio actual
 
-    git add *.<extensión>
+```
+git add *.<extensión>
+```
 
 ## Agregar archivos de cierta extensión de todo el repositorio
 
-    git add "*.<extensión>"
+```
+git add "*.<extensión>"
+```
 
 ## Revisar el estado actual del repositorio
 
-    git status
+```
+git status
+```
 
 El estado mostrará la rama actual y su estado al compararla con la rama remota, si esta existe.
 También mostrará los cambios "staged", los archivos que han recibido cambios pero todavía no se marcan como "staged" y los archivos nuevos, que todavía no son parte del repositorio.
 
 ## Quitar un archivo de los cambios "staged"
 
-    git restore --staged <archivo>
+```
+git restore --staged <archivo>
+```
 
 ## Agregar archivos de forma interactiva
 
-    git add -i
+```
+git add -i
+```
 
 Esto inicia un menú para manejar los cambios.
 
@@ -153,47 +203,67 @@ Esto inicia un menú para manejar los cambios.
 
 Existen 2 formas de hacerlo. No es necesario usar ```git add``` de antemano.
 
-    git commit -a -m "<mensaje del commit>"
+```
+git commit -a -m "<mensaje del commit>"
+```
 
-    git commit --all -m "<mensaje del commit>"
+```
+git commit --all -m "<mensaje del commit>"
+```
 
 Con "archivos conocidos" se refiere a los archivos que ya eran parte del repositorio en el último commit realizado y que tuvieron cambios desde la realización de éste.
 En otras palabras, los archivos nuevos serán ignorados en este commit.
 
 ## Ver todos los cambios en detalle, incluyendo los no registrados
 
-    git diff
+```
+git diff
+```
 
 ## Ver los cambios marcados como "staged" en detalle
 
-    git diff --staged
+```
+git diff --staged
+```
 
 ## Deshacer el último commit local y mantener los cambios como "staged"
 
-    git reset --soft HEAD^
+```
+git reset --soft HEAD^
+```
 
 ## Deshacer el último commit local y borrar todos los cambios
 
-    git reset --hard HEAD^
+```
+git reset --hard HEAD^
+```
 
 ## Deshacer los últimos 2 commits locales y borrar todos los cambios
 
-    git reset --hard HEAD^^
+```
+git reset --hard HEAD^^
+```
 
 ## Añadir archivos al último commit
 
-    git add <archivo>
-    git commit --amend -m "<mensaje nuevo>"
+```
+git add <archivo>
+git commit --amend -m "<mensaje nuevo>"
+```
 
 El mensaje anterior se sobreescribirá.
 
 ## Ver el historial detallado de cambios de un archivo
 
-    git blame <archivo>
+```
+git blame <archivo>
+```
 
 ## Borrar un archivo de Git y del disco
 
-    git rm <archivo>
+```
+git rm <archivo>
+```
 
 Esto sólo funciona con los archivos que están presentes en el último commit realizado.
 
@@ -201,132 +271,180 @@ Esto sólo funciona con los archivos que están presentes en el último commit r
 
 Se debe crear el siguiente archivo en la carpeta raíz o donde están los archivos que se quieren ignorar.
 
-    .gitignore
+```
+.gitignore
+```
 
 El archivo se modifica con cualquier editor de texto y los nombres de archivos o directorios dentro de él serán ignorados por Git.
 
 Por ejemplo, para hacer que Git ignore el archivo ```archivo.txt``` y todos los archivos de la carpeta ```test```, el .gitignore debe tener el siguiente contenido.
 
-    archivo.txt
-    test
+```
+archivo.txt
+test
+```
 
 ## Borrar un archivo ignorado del repositorio, sin removerlo del disco
 
-    git rm --cached <archivo>
+```
+git rm --cached <archivo>
+```
 
 Con archivo ignorado se refiere a los que aparecen en ```.gitignore```, pero tenían una versión guardada en el último commit.
 Al igual que ```git add```, esta operación será confirmada en el próximo commit.
 
 ## Crear una rama
 
-    git branch <rama>
+```
+git branch <rama>
+```
 
 La rama creada será igual a la de origen y no estará activa.
 
 ## Cambiar la rama que se usa actualmente
 
-    git checkout <rama>
+```
+git checkout <rama>
+```
 
 ## Crear una rama y conectarse a ella
 
-    git checkout -b <rama>
+```
+git checkout -b <rama>
+```
 
 Básicamente es lo mismo que ```git branch``` seguido de ```git checkout```.
 
 ## Ver la rama activa
 
-    git branch
+```
+git branch
+```
 
 ## Ver la lista de ramas creadas
 
-    git branch --list
+```
+git branch --list
+```
 
 La rama activa se mostrará en verde.
 
 ## Borrar una rama que no se está usando
 
-    git branch -d <rama>
+```
+git branch -d <rama>
+```
 
 Si se tienen commits sin fusionar, se mostrarán errores.
 
 ## Forzar el borrado de una rama local
 
-    git branch -D <rama>
+```
+git branch -D <rama>
+```
 
 Esto ignorará cualquier error.
 Se debe tener cuidado al momento de usarlo.
 
 ## Cambiar el nombre de la rama activa
 
-    git branch -m <nombre nuevo>
+```
+git branch -m <nombre nuevo>
+```
 
 ## Revisar las diferencias entre 2 ramas
 
-    git diff <rama de origen> <rama de destino>
+```
+git diff <rama de origen> <rama de destino>
+```
 
 ## Fusionar los commits de una rama a la rama activa
 
-    git merge <rama>
+```
+git merge <rama>
+```
 
 ## Comparar 2 commits
 
-    git diff <sha del commit 1> <sha del commit 2>
+```
+git diff <sha del commit 1> <sha del commit 2>
+```
 
 El sha del commit es el que aparece al usar ```git log```.
 Se puede usar el sha corto o el sha largo, pero se recomienda usar el largo si es posible.
 
 ## Regresar a un commit pasado temporalmente
 
-    git checkout <sha del commit>
+```
+git checkout <sha del commit>
+```
 
 En este estado, no se pueden hacer commits.
 
 ## Regresar a un commit pasado y crear una rama nueva
 
-    git checkout -b <rama> <sha del commit>
+```
+git checkout -b <rama> <sha del commit>
+```
 
 Esto permite hacer commits en una rama nueva que tendrá como último commit el del sha que se le entregó.
 
 ## Conectar un repositorio remoto a uno local
 
-    git remote add origin <url>
+```
+git remote add origin <url>
+```
 
 Las ramas remotas tendrán el nombre ```origin/<rama>```.
 
 ## Ver el repositorio remoto
 
-    git remote show origin
+```
+git remote show origin
+```
 
 ## Ver la lista de ramas remotas
 
-    git branch -r
+```
+git branch -r
+```
 
 ## Enviar los cambios locales al repositorio remoto
 
-    git push
+```
+git push
+```
 
 ## Añadir una etiqueta
 
-    git tag <etiqueta> <sha del commit>
+```
+git tag <etiqueta> <sha del commit>
+```
 
 Las etiquetas generalmente se usan para marcar versiones.
 
 ## Mostrar una lista de todas las etiquetas
 
-    git tag
+```
+git tag
+```
 
 ## Revisar el repositorio en el estado que tenía en una etiqueta
 
-    git checkout <etiqueta>
+```
+git checkout <etiqueta>
+```
 
 ## Iniciar un repositorio desde cero y subirlo a GitHub/GitLab
 
 Paso 1: Inicializar el repositorio local.
 
-    git init
-    git add .
-    git commit -m "<commit inicial>"
-    git branch -m main
+```
+git init
+git add .
+git commit -m "<commit inicial>"
+git branch -m main
+```
 
 En GitHub, main es el nombre por defecto de la rama principal, en vez de master.
 
@@ -334,8 +452,10 @@ Paso 2: Crear el repositorio en GitHub/GitLab y copiar su URL.
 
 Paso 3: Añadir el repositorio remoto y subir los cambios.
 
-    git remote add origin <URL>
-    git push -u origin main
+```
+git remote add origin <URL>
+git push -u origin main
+```
 
 Paso 4: Iniciar sesión en los logon que aparecerán.
 
@@ -345,7 +465,9 @@ Existen muchos métodos, pero el más seguro es usar SSH.
 
 Paso 1: Generar una nueva clave SSH en base al correo electrónico.
 
-     ssh-keygen -t ed25519 -C "<correo del usuario>"
+```
+ssh-keygen -t ed25519 -C "<correo del usuario>"
+```
 
 Se debe pulsar Intro cuando pregunte donde guardarlo para que se guarde en la ubicación por defecto.
 Después, se ingresa la passphrase que actuará como una contraseña.
@@ -385,8 +507,9 @@ Paso 4: Copiar la clave SSH.
 clip < ~/.ssh/id_ed25519.pub
 ```
 
-Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH.
-Ir a GitLab > Preferences > SSH Keys > pegar la clave SSH y Add key.
+Paso 5 (GitHub): Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH.
+
+Paso 5 (GitLab): Ir a GitLab > Preferences > SSH Keys > pegar la clave SSH y Add key.
 
 Es importante recordar que esta clave es muy importante.
 No se debe compartir con nadie.
@@ -429,34 +552,46 @@ Si es la primera vez que se suben cambios, se recomienda usar ```git push -u```.
 
 ## Enviar etiquetas al repositorio remoto
 
-    git push --tags
+```
+git push --tags
+```
 
 ## Enviar todas las ramas y etiquetas
 
-    git push --all
+```
+git push --all
+```
 
 ## Revertir el repositorio local a un commit todavía no subido al repositorio remoto
 
-    git reset --hard <sha del commit>
+```
+git reset --hard <sha del commit>
+```
 
 Esto eliminará todos los cambios locales.
 No se debe usar si todavía se tiene trabajo que se quiere mantener.
 
 ## Deshacer un commit subido al repositorio remoto
 
-    git revert <sha del commit>
+```
+git revert <sha del commit>
+```
 
 Esto hará un commit que deshace los cambios.
 
 ## Deshacer múltiples commits en commits separados
 
-    git revert <sha del commit 1> <sha del commit 2> ...
+```
+git revert <sha del commit 1> <sha del commit 2> ...
+```
 
 Cada sha proporcionado creará su propio commit de reversión.
 
 ## Deshacer múltiples commits en un mismo commit
 
-    git revert --no-commit <sha del commit 1> <sha del commit 2> ...
-    git commit -m "<mensaje del commit>"
+```
+git revert --no-commit <sha del commit 1> <sha del commit 2> ...
+git commit -m "<mensaje del commit>"
+```
 
 Esto permite juntar muchos ```git revert``` en un mismo commit.
