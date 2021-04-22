@@ -319,7 +319,7 @@ Las etiquetas generalmente se usan para marcar versiones.
 
     git checkout <etiqueta>
 
-## Iniciar un repositorio desde cero y subirlo a GitHub
+## Iniciar un repositorio desde cero y subirlo a GitHub/GitLab
 
 Paso 1: Inicializar el repositorio local.
 
@@ -330,7 +330,7 @@ Paso 1: Inicializar el repositorio local.
 
 En GitHub, main es el nombre por defecto de la rama principal, en vez de master.
 
-Paso 2: Crear el repositorio en GitHub y copiar su URL.
+Paso 2: Crear el repositorio en GitHub/GitLab y copiar su URL.
 
 Paso 3: Añadir el repositorio remoto y subir los cambios.
 
@@ -339,7 +339,7 @@ Paso 3: Añadir el repositorio remoto y subir los cambios.
 
 Paso 4: Iniciar sesión en los logon que aparecerán.
 
-## Hacer que Git recuerde las credenciales del inicio de sesión en GitHub
+## Hacer que Git recuerde las credenciales del inicio de sesión en GitHub/GitLab
 
 Existen muchos métodos, pero el más seguro es usar SSH.
 
@@ -381,36 +381,48 @@ Paso 3: Volver a iniciar Git Bash e ingresar la passphrase que se registró ante
 
 Paso 4: Copiar la clave SSH.
 
-     clip < ~/.ssh/id_ed25519.pub
+```
+clip < ~/.ssh/id_ed25519.pub
+```
 
 Paso 5: Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar la clave SSH.
+Ir a GitLab > Preferences > SSH Keys > pegar la clave SSH y Add key.
 
 Es importante recordar que esta clave es muy importante.
 No se debe compartir con nadie.
+Se pedirá esta clave regularmente.
 
 ## Recibir cambios desde el repositorio remoto
 
-    git fetch
+```
+git fetch
+```
 
 Cualquier conflicto que se encuentre deberá ser solucionado usando ```git add```.
 
 ## Recibir cambios desde el repositorio remoto y fusionar
 
-    git pull
+```
+git pull
+```
 
 Los conflictos se solucionarán automáticamente, pero puede causar errores.
 Básicamente es un ```git fetch``` seguido de un ```git merge```.
 
 ## Subir un cambio de la rama local al repositorio remoto y sincronizar
 
-    git push -u
+```
+git push -u
+```
 
 Esto hará que se suban los cambios locales y hace que se relacionen las ramas locales con las remotas automáticamente.
 Se recomienda usar ```git fetch``` o ```git pull``` antes de ```git push```, especialmente si se está trabajando con otras personas.
 
 ## Subir cualquier cambio hecho a la rama local después de conectar el repositorio remoto
 
-    git push
+```
+git push
+```
 
 Este cambio sólo subirá los cambios de la rama activa.
 Si es la primera vez que se suben cambios, se recomienda usar ```git push -u```.
