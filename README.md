@@ -59,6 +59,12 @@ git init
 
 Por defecto, este repositorio se iniciará con la rama ```master```.
 
+## Inicializar un repositorio en otra carpeta
+
+```
+git init <ruta>
+```
+
 ## Inicializar un repositorio con otra rama
 
 ```
@@ -74,7 +80,7 @@ git config --global init.defaultBranch <rama>
 Esto cambiará el nombre de la rama creada al usar ```git init```.
 Un ejemplo de uso es para cambiar el valor por defecto ```master``` a ```main```, ya que gran parte de la comunidad de Git ha empezado a migrar a este nuevo nombre.
 
-## Almacenar una copia local de un repositorio en internet
+## Almacenar una copia local de un repositorio remoto
 
 ```
 git clone <url>
@@ -94,6 +100,18 @@ git clone <url> <carpeta>
 git clone <usuario>@<host>:<ruta>
 ```
 
+## Clonar desde GitHub
+
+```
+git clone <url del repositorio>
+```
+
+## Clonar desde GitLab
+
+```
+git clone git@gitlab.com:<ruta>
+```
+
 ## Hacer la configuración para el repositorio actual
 
 ```
@@ -103,7 +121,7 @@ git config --local user.email "<correo>"
 
 Esta configuración se guardará como local y sobreescribe la configuración global (sólo para los repositorios donde se haya configurado).
 
-## Agregar cambios hechos a archivos
+## Agregar cambios hechos a un archivo específico
 
 ```
 git add <archivo>
@@ -131,6 +149,18 @@ git add .
 
 ```
 git add --all
+```
+
+## Remover todos los cambios realizados
+
+```
+git reset
+```
+
+## Remover un archivo específico
+
+```
+git reset <archivo>
 ```
 
 ## Hacer un commit con un mensaje
@@ -367,16 +397,16 @@ git merge <rama>
 ## Comparar 2 commits
 
 ```
-git diff <sha del commit 1> <sha del commit 2>
+git diff <hash del commit 1> <hash del commit 2>
 ```
 
-El sha del commit es el que aparece al usar ```git log```.
-Se puede usar el sha corto o el sha largo, pero se recomienda usar el largo si es posible.
+El hash del commit es el que aparece al usar ```git log```.
+Se puede usar el hash corto o el hash largo, pero se recomienda usar el largo si es posible.
 
 ## Regresar a un commit pasado temporalmente
 
 ```
-git checkout <sha del commit>
+git checkout <hash del commit>
 ```
 
 En este estado, no se pueden hacer commits.
@@ -384,12 +414,12 @@ En este estado, no se pueden hacer commits.
 ## Regresar a un commit pasado y crear una rama nueva
 
 ```
-git checkout -b <rama> <sha del commit>
+git checkout -b <rama> <hash del commit>
 ```
 
-Esto permite hacer commits en una rama nueva que tendrá como último commit el del sha que se le entregó.
+Esto permite hacer commits en una rama nueva que tendrá como último commit el del hash que se le entregó.
 
-## Conectar un repositorio remoto a uno local
+## Conectar un repositorio local a uno remoto
 
 ```
 git remote add origin <url>
@@ -418,7 +448,7 @@ git push
 ## Añadir una etiqueta
 
 ```
-git tag <etiqueta> <sha del commit>
+git tag <etiqueta> <hash del commit>
 ```
 
 Las etiquetas generalmente se usan para marcar versiones.
@@ -565,7 +595,7 @@ git push --all
 ## Revertir el repositorio local a un commit todavía no subido al repositorio remoto
 
 ```
-git reset --hard <sha del commit>
+git reset --hard <hash del commit>
 ```
 
 Esto eliminará todos los cambios locales.
@@ -574,7 +604,7 @@ No se debe usar si todavía se tiene trabajo que se quiere mantener.
 ## Deshacer un commit subido al repositorio remoto
 
 ```
-git revert <sha del commit>
+git revert <hash del commit>
 ```
 
 Esto hará un commit que deshace los cambios.
@@ -582,15 +612,15 @@ Esto hará un commit que deshace los cambios.
 ## Deshacer múltiples commits en commits separados
 
 ```
-git revert <sha del commit 1> <sha del commit 2> ...
+git revert <hash del commit 1> <hash del commit 2> ...
 ```
 
-Cada sha proporcionado creará su propio commit de reversión.
+Cada hash proporcionado creará su propio commit de reversión.
 
 ## Deshacer múltiples commits en un mismo commit
 
 ```
-git revert --no-commit <sha del commit 1> <sha del commit 2> ...
+git revert --no-commit <hash del commit 1> <hash del commit 2> ...
 git commit -m "<mensaje del commit>"
 ```
 
