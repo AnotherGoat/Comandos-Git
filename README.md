@@ -625,3 +625,32 @@ git commit -m "<mensaje del commit>"
 ```
 
 Esto permite juntar muchos ```git revert``` en un mismo commit.
+
+## Añadir otro repositorio remoto
+
+```
+git remote add <nombre del repositorio> <url>
+```
+
+Al usar comandos como ```git clone```, el repositorio remoto creado por defecto se llama ```origin```.
+Por este motivo, se acostumbra que el primer repositorio remoto tenga ese nombre.
+Sin embargo, no es obligatorio.
+Perfectamente, se pueden tener 2 repositorios remotos llamados ```github``` y ```gitlab```.
+
+## Revisar todos los repositorios remotos
+
+```
+git remote -v
+```
+
+## Enviar los cambios hechos a un repositorio remoto en específico
+
+```
+git push <repositorio remoto> <rama>
+```
+
+## Enviar los cambios hechos a varios repositorios remotos
+
+```
+git push <repositorio remoto 1> <rama 1> && git push <repositorio remoto 2> <rama 2>
+```
