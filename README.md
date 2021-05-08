@@ -6,6 +6,15 @@ Los conceptos no se explican demasiado, se debe considerar más como una "cheat 
 Todos los comandos deben ejecutarse desde el directorio raíz del repositorio.
 Las palabras entre <> se deben reemplazar por el nombre del elemento que describen.
 
+## Importancia de Git
+
+Git permite:
+
+* Guardar sólo los cambios realizados a muchos archivos.
+* Permitir que múltiples personas modifiquen el mismo archivo sin que se pierda el trabajo de ninguno.
+* Saber qué persona cometió algún error.
+* Revertir los cambios a una versión anterior.
+
 ## Instalar Git
 
 Se debe descargar el instalador desde el [sitio web oficial](https://www.git-scm.com/downloads).
@@ -51,7 +60,7 @@ git config user.email
 gitk
 ```
 
-## Inicializar un repositorio
+## Inicializar un repositorio Git
 
 ```
 git init
@@ -80,7 +89,7 @@ git config --global init.defaultBranch <rama>
 Esto cambiará el nombre de la rama creada al usar ```git init```.
 Un ejemplo de uso es para cambiar el valor por defecto ```master``` a ```main```, ya que gran parte de la comunidad de Git ha empezado a migrar a este nuevo nombre.
 
-## Almacenar una copia local de un repositorio remoto
+## Almacenar una copia local de un repositorio remoto usando HTTPS
 
 ```
 git clone <url>
@@ -88,28 +97,19 @@ git clone <url>
 
 La copia se almacenará en la carpeta actual.
 
-## Almacenar una copia local en otra carpeta
-
-```
-git clone <url> <carpeta>
-```
-
 ## Clonar usando SSH
 
 ```
 git clone <usuario>@<host>:<ruta>
 ```
 
-## Clonar desde GitHub
+## Almacenar una copia local en una carpeta distinta
+
+Usando HTTPS o SSH
 
 ```
-git clone <url del repositorio>
-```
-
-## Clonar desde GitLab
-
-```
-git clone git@gitlab.com:<ruta>
+git clone <url> <carpeta>
+git clone <usuario>@<host>:<ruta> <carpeta>
 ```
 
 ## Hacer la configuración para el repositorio actual
@@ -127,7 +127,7 @@ Esta configuración se guardará como local y sobreescribe la configuración glo
 git add <archivo>
 ```
 
-Los archivos añadidos con ```git add``` serán marcados como staged.
+Los archivos añadidos con ```git add``` se mueven a ```staged```.
 Para confirmarlos, se usa el comando ```git commit```, que se explica más adelante.
 
 ## Agregar todos los archivos dentro de una carpeta
@@ -151,6 +151,8 @@ git add .
 git add --all
 ```
 
+Se agregan todos los archivos de la carpeta actual.
+
 ## Remover todos los cambios realizados
 
 ```
@@ -169,7 +171,7 @@ git reset <archivo>
 git commit -m "<mensaje del commit>"
 ```
 
-El commit confirma todos los cambios marcados como "staged" al momento de realizarlo.
+El commit confirma todos los cambios ```staged``` al momento de realizarlo.
 El mensaje debería describir en qué consistió el cambio.
 
 ## Ver el historial de commits realizados
@@ -213,9 +215,9 @@ git status
 ```
 
 El estado mostrará la rama actual y su estado al compararla con la rama remota, si esta existe.
-También mostrará los cambios "staged", los archivos que han recibido cambios pero todavía no se marcan como "staged" y los archivos nuevos, que todavía no son parte del repositorio.
+Luego mostrará los cambios que tiene la base de datos, los cuales se separan en los cambios a archivos en ```staged```, los archivos que han recibido cambios pero todavía no están en ```staged``` y los archivos nuevos, que todavía no son parte del repositorio.
 
-## Quitar un archivo de los cambios "staged"
+## Quitar un archivo de los cambios ```staged```
 
 ```
 git restore --staged <archivo>
@@ -250,13 +252,13 @@ En otras palabras, los archivos nuevos serán ignorados en este commit.
 git diff
 ```
 
-## Ver los cambios marcados como "staged" en detalle
+## Ver los cambios en ```staged``` en detalle
 
 ```
 git diff --staged
 ```
 
-## Deshacer el último commit local y mantener los cambios como "staged"
+## Deshacer el último commit local y mantener los cambios como ```staged```
 
 ```
 git reset --soft HEAD^
