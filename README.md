@@ -24,6 +24,17 @@ Para asegurarse de que se instaló correctamente, se puede usar el siguiente com
 git --version
 ```
 
+## Conceptos importantes
+
+* Directorio de trabajo: Entorno de desarrollo personal, lo que se ve en el explorador de archivos, también conocidos como ```tracked```.
+* Área de preparación o ```staging```: Espacio en la RAM donde se almacenan los archivos que rastrea Git, también conocidos como ```tracked```.
+Se añaden archivos a este espacio usando ```git add```.
+* Repositorio local: Archivos en la base de datos que se encuentra en la carpeta .git. Al usar ```git commit```, se mueven todos los cambios en ```staging``` al repositorio local.
+* Repositorio remoto: Repositorio almacenado en un servidor en internet.
+Se puede descagar como repositorio local usando ```git clone```.
+Los cambios del repositorio local se mueven a él usando ```git push```.
+Se pueden recibir los cambios usando ```git fetch``` + ```git merge``` o usando ```git pull```.
+
 ## Ver una pequeña introducción a Git
 
 ```
@@ -52,6 +63,18 @@ git config --global user.email "<correo>"
 ```
 git config user.name
 git config user.email
+```
+
+## Ver todas las configuraciones actuales
+
+```
+git config --list
+```
+
+## Ver las configuraciones actuales y el archivo donde se encuentran
+
+```
+git config --list --show-origin
 ```
 
 ## Iniciar la interfaz gráfica
@@ -156,16 +179,31 @@ git add --all
 
 Se agregan todos los archivos de la carpeta actual.
 
-## Remover todos los cambios realizados
+## Remover todos los cambios realizados del ```staging```
 
 ```
 git reset
 ```
 
-## Remover un archivo específico
+Estos cambios se marcarán como ```untracked```.
+
+
+## Remover un archivo específico del ```staging```
 
 ```
 git reset <archivo>
+```
+
+## Remover todos los cambios realizados y mantener staging
+
+```
+git reset --soft
+```
+
+## Remover todos los cambios realizados del disco
+
+```
+git reset --hard
 ```
 
 ## Hacer un commit con un mensaje
@@ -178,18 +216,33 @@ El commit confirma todos los cambios ```staged``` al momento de realizarlo.
 Los cambios confirmados se mueven a la carpeta ```.git```.
 El mensaje debería describir en qué consistió el cambio.
 
+## Hacer commit sin un mensaje
+
+```
+git commit
+```
+
+En realidad, no se puede hacer un commit si un mensaje.
+Git mostrará un mensaje por defecto indicando que el usuario debe escribir el mensaje del commit y le pedirá que lo ingrese.
+Se pedirá escribir el mensaje utilizando el editor Vim.
+
+## Uso básico de Vim
+
+Para comenzar a escribir texto se debe pulsar Escape + I, con lo cual se cambia al modo ```INSERTAR```.
+Para salir de esta pantalla se debe pulsar Escape Shift Z Z, lo cual guarda el archivo y realiza el commit.
+Si se deja el mensaje del commit en blanco, se aborta.
+
 ## Ver el historial de commits realizados
 
 ```
 git log
 ```
 
-## Salir de una lista larga de información
+## Listas largas de información
 
 Si Git tiene demasiada información que mostrar con comandos como ```git log```, entonces no podrá mostrarla toda en pantalla al mismo tiempo.
-
 Se puede pulsar Intro para mostrar la próxima línea, siempre que no aparezca ```(END)``` al final.
-
+También se pueden usar las flechas para moverse por el archivo.
 Para salir, se debe escribir ```q``` en el terminal.
 
 ## Ver el historial de commits compacto
@@ -199,6 +252,18 @@ git log --oneline
 ```
 
 Esto reducirá los detalles que se muestran sobre cada commit.
+
+## Ver historial de commits que alteraron un archivo específico
+
+```
+git log <archivo>
+```
+
+## Ver historial de cambios mostrando un resumen de los archivos modificados en cada usando
+
+```
+git log --stat
+```
 
 ## Revisar el estado actual del repositorio
 
@@ -326,7 +391,7 @@ archivo.txt
 test
 ```
 
-## Borrar un archivo ignorado del repositorio, sin removerlo del disco
+## Borrar un archivo ```tracked``` del repositorio, sin removerlo del disco
 
 ```
 git rm --cached <archivo>
@@ -405,11 +470,12 @@ git merge <rama>
 ## Comparar 2 commits
 
 ```
-git diff <hash del commit 1> <hash del commit 2>
+git diff <hash del commit origen> <hash del commit destino>
 ```
 
 El hash del commit es el que aparece al usar ```git log```.
 Se puede usar el hash corto o el hash largo, pero se recomienda usar el largo si es posible.
+Los cambios mostrados son los cambios que se harían para ir del commit origen al commit destino.
 
 ## Regresar a un commit pasado temporalmente
 
@@ -471,6 +537,32 @@ git tag
 
 ```
 git checkout <etiqueta>
+```
+
+## Revisar un archivo en específico en el estado que tenía en un commit
+
+```
+git checkout <hash del commit> <archivo>
+```
+
+## Revisar un archivo en específico en el estado que tiene en una rama
+
+```
+git checkout <rama> <archivo>
+```
+
+## Revisar un archivo en específico en el estado que tiene en una etiqueta
+
+```
+git checkout <etiqueta> <archivo>
+```
+
+## Regresar un archivo a una versión anterior
+
+```
+git checkout <hash del commit> <archivo>
+git add <archivo>
+git commit -m "<mensaje>"
 ```
 
 ## Iniciar un repositorio desde cero y subirlo a GitHub/GitLab
@@ -784,4 +876,3 @@ git flow feature pull origin
 ```
 git flow feature finish -F <rama de característica>
 ```
-
