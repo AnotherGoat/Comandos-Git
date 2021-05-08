@@ -67,6 +67,9 @@ git init
 ```
 
 Por defecto, este repositorio se iniciará con la rama ```master```.
+Se crea un área ```staging``` en la memoria RAM.
+Se crea el repositorio en la carpeta ```.git```.
+Por defecto, todos los archivos al momento de inicializar serán ```untracked```.
 
 ## Inicializar un repositorio en otra carpeta
 
@@ -127,7 +130,7 @@ Esta configuración se guardará como local y sobreescribe la configuración glo
 git add <archivo>
 ```
 
-Los archivos añadidos con ```git add``` se mueven a ```staged```.
+Los archivos añadidos con ```git add``` se vuelven ```tracked``` y se mueven a ```staged```.
 Para confirmarlos, se usa el comando ```git commit```, que se explica más adelante.
 
 ## Agregar todos los archivos dentro de una carpeta
@@ -172,6 +175,7 @@ git commit -m "<mensaje del commit>"
 ```
 
 El commit confirma todos los cambios ```staged``` al momento de realizarlo.
+Los cambios confirmados se mueven a la carpeta ```.git```.
 El mensaje debería describir en qué consistió el cambio.
 
 ## Ver el historial de commits realizados
@@ -196,6 +200,21 @@ git log --oneline
 
 Esto reducirá los detalles que se muestran sobre cada commit.
 
+## Revisar el estado actual del repositorio
+
+```
+git status
+```
+
+El estado mostrará la rama actual y su estado al compararla con la rama remota, si esta existe.
+Luego mostrará los cambios que tiene la base de datos, los cuales se separan en los cambios a archivos en ```staged```, los archivos que han recibido cambios pero todavía no están en ```staged``` y los archivos nuevos, que todavía no son parte del repositorio.
+
+## Revisar las líneas cambiadas en el último comit
+
+```
+git show
+```
+
 ## Agregar archivos de cierta extensión en el directorio actual
 
 ```
@@ -207,15 +226,6 @@ git add *.<extensión>
 ```
 git add "*.<extensión>"
 ```
-
-## Revisar el estado actual del repositorio
-
-```
-git status
-```
-
-El estado mostrará la rama actual y su estado al compararla con la rama remota, si esta existe.
-Luego mostrará los cambios que tiene la base de datos, los cuales se separan en los cambios a archivos en ```staged```, los archivos que han recibido cambios pero todavía no están en ```staged``` y los archivos nuevos, que todavía no son parte del repositorio.
 
 ## Quitar un archivo de los cambios ```staged```
 
@@ -339,6 +349,8 @@ La rama creada será igual a la de origen y no estará activa.
 git checkout <rama>
 ```
 
+Esto cambiará los archivos del directorio a los de la rama especificada.
+
 ## Crear una rama y conectarse a ella
 
 ```
@@ -347,16 +359,10 @@ git checkout -b <rama>
 
 Básicamente es lo mismo que ```git branch``` seguido de ```git checkout```.
 
-## Ver la rama activa
-
-```
-git branch
-```
-
 ## Ver la lista de ramas creadas
 
 ```
-git branch --list
+git branch
 ```
 
 La rama activa se mostrará en verde.
@@ -656,3 +662,126 @@ git push <repositorio remoto> <rama>
 ```
 git push <repositorio remoto 1> <rama 1> && git push <repositorio remoto 2> <rama 2>
 ```
+
+## Borrar una rama remota
+
+```
+git push origin :<rama>
+```
+
+## Iniciar repositorio Git Flow
+
+```
+git flow init
+```
+
+Esto permite seleccionar los nombres de las ramas ```master```, ```develop```, ```feature```, ```release```, ```bugfix```, ```hotfix``` y ```support```.
+En general, se recomienda mantener los nombres por defecto.
+Se crearán las ramas ```master``` y ```develop```.
+
+## Iniciar una rama de característica
+
+```
+git flow feature start <rama de característica>
+```
+
+Una rama de característica se usa para añadir una nueva funcionalidad al programa.
+Estas ramas tendrán el prefijo ```feature/``` por defecto.
+Se basan en los commits que se tenían en ```develop``` al momento de usar el comando.
+
+## Finalizar una rama de característica
+
+```
+git flow feature finish <rama de característica>
+```
+
+Esto realiza 3 cosas: une los cambios a ```develop```, cambia a esa rama y borra la rama de característica.
+
+## Mostrar historial de cambios incluyendo todas las ramas
+
+```
+git log --oneline --decorate --all --graph
+```
+
+## Mostrar historial de cambios detallado incluyendo todas las ramas
+
+```
+git log --decorate --all --graph
+```
+
+## Propagar cambios de la rama ```develop``` a la rama de característica
+
+```
+git checkout feature/<rama de característica>
+git merge develop
+```
+
+## Iniciar una rama de lanzamiento
+
+```
+git flow release start <rama de lanzamiento>
+```
+
+Una rama de lanzamiento es una versión casi terminada de ```develop```.
+Estas ramas tendrán el prefijo ```release/``` por defecto.
+Se basan en los commits que se tenían en ```develop``` al momento de usar el comando.
+
+## Finalizar una rama de lanzamiento
+```
+git flow release finish <rama de lanzamiento>
+```
+
+Esto realiza 3 cosas: une los cambios a ```develop```, cambia a esa rama y borra la rama de lanzamiento.
+
+## Iniciar una rama de bugfix
+
+```
+git flow bugfix start <rama de bugfix>
+```
+
+Una rama de ```bugfix``` es una rama de correción de errores de una rama de ```release```.
+Estas ramas tendrán el prefijo ```bugfix/``` por defecto.
+Se basan en los commits que se tenían en ```develop``` al momento de usar el comando.
+
+## Finalizar una rama de bugfix
+```
+git flow bugfix finish <rama de bugfix>
+```
+
+Esto realiza 3 cosas: une los cambios a ```develop```, cambia a esa rama y borra la rama de bugfix.
+
+## Iniciar una rama de hotfix
+
+```
+git flow hotfix start <rama de hotfix>
+```
+
+Una rama de ```hotfix``` es una rama de correción de errores de ```master```.
+Estas ramas tendrán el prefijo ```hotfix/``` por defecto.
+Se basan en los commits que se tenían en ```develop``` al momento de usar el comando.
+
+## Finalizar una rama de hotfix
+```
+git flow hotfix finish <rama de hotfix>
+```
+
+Esto realiza 3 cosas: une los cambios a ```develop```, cambia a esa rama y borra la rama de hotfix.
+
+## Publicar una rama de característica al repositorio remoto
+
+```
+git flow feature publish <rama de característica>
+```
+
+## Recibir ramas de tipo feature
+
+```
+git flow feature pull origin
+```
+
+## Terminar una rama de característica y borrarla del repositorio remoto
+
+```
+git flow feature finish -F <rama de característica>
+```
+
