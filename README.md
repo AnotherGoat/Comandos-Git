@@ -71,6 +71,11 @@ git config user.email
 
 ## Ver todas las configuraciones actuales
 
+Existen 2 formas de hacerlo:
+
+```
+git config -l
+```
 ```
 git config --list
 ```
@@ -436,6 +441,12 @@ git branch
 
 La rama activa se mostrará en verde.
 
+## Ver lista de ramas, incluyendo las remotas
+
+```
+git branch -a
+```
+
 ## Borrar una rama que no se está usando
 
 ```
@@ -613,6 +624,14 @@ git add <archivo>
 git commit -m "<mensaje>"
 ```
 
+## Añadir un repositorio remoto
+
+```
+git remote add origin <url>
+```
+
+El nombre ```origin``` es el más usado, pero se puede cambiar a lo que se desee.
+
 ## Iniciar un repositorio desde cero y subirlo a GitHub/GitLab
 
 Paso 1: Inicializar el repositorio local.
@@ -631,7 +650,7 @@ Paso 2: Crear el repositorio en GitHub/GitLab y copiar su URL.
 Paso 3: Añadir el repositorio remoto y subir los cambios.
 
 ```
-git remote add origin <URL>
+git remote add origin <url>
 git push -u origin main
 ```
 
@@ -689,9 +708,37 @@ Paso 5 (GitHub): Ir a GitHub > Settings > SSH and GPG keys > New SSH key y pegar
 
 Paso 5 (GitLab): Ir a GitLab > Preferences > SSH Keys > pegar la clave SSH y Add key.
 
-Es importante recordar que esta clave es muy importante.
+Es importante recordar que esta clave es muy importante, ya que añade otro nivel de seguridad.
 No se debe compartir con nadie.
 Se pedirá esta clave regularmente.
+
+## Generar clave SSH manualmente
+
+Se debe ingresar a la carpeta home del usuario actual.
+
+```
+ssh-keygen -t rsa -b 4096 -C "<email>"
+```
+
+O en el caso general, se puede definir así.
+
+```
+ssh-keygen -t <algoritmo> -b <grado de encriptación> -C "<email>"
+```
+
+Después, pedirá la ubicación donde se guardará.
+Se recomienda dejar la ubicación por defecto.
+Luego pide un passphrase, como una capa de seguridad adicional.
+Una passphrase es una contraseña que acepta espacios dentro de ella.
+El archivo sin extensión es la llave privada y el archivo .pub es la llave pública.
+
+Después se debe añadir la llave, para que el sistema operativo la reconozca.
+
+```
+ssh-add ~/.ssh/id_rsa
+```
+
+Se debe añadir la clave privada, no la pública.
 
 ## Recibir cambios desde el repositorio remoto
 
@@ -709,6 +756,14 @@ git pull
 
 Los conflictos se solucionarán automáticamente, pero puede causar errores.
 Básicamente es un ```git fetch``` seguido de un ```git merge```.
+
+## Recibir cambios del repositorio remoto, aunque este inició de una forma distinta al actuales
+
+```
+git pull <repositorio> <rama> --allow-unrelated-histories
+```
+
+Esto sirve para casos en los que el repositorio remoto se inició con otros archivos, como por ejemplo un ```README.md``` o un ```.gitignore```.
 
 ## Subir un cambio de la rama local al repositorio remoto y sincronizar
 
@@ -808,6 +863,14 @@ git push <repositorio remoto 1> <rama 1> && git push <repositorio remoto 2> <ram
 ```
 git push origin :<rama>
 ```
+
+## Relacionar automáticamente las ramas de un repositorio local con uno remotos
+
+```
+git push -u <repositorio remoto> <rama>
+```
+
+Esto permite usar ```git push``` para enviar todos los cambios que se hagan en el futuro, en vez de tener que escribir el repositorio y la rama otra vez.
 
 ## Git Flow
 
