@@ -471,6 +471,50 @@ git diff <rama de origen> <rama de destino>
 git merge <rama>
 ```
 
+Los commits siempre irán desde la rama escrita a la rama activa.
+Los cambios se reciben en un nuevo commit, el cual también debe tener un mensaje.
+Es por este motivo que al usar ```git merge```, se abrirá el editor Vim.
+Sin embargo, en la mayoría de los casos el mensaje por defecto es suficiente.
+Después de fusionar, se añade el nuevo commit a la rama activa y se traen todos los commits nuevos de la rama especificada.
+
+## Conflictos
+
+Git nunca borra nada.
+En caso de que ocurra un conflicto, por ejemplo cuando 2 commits en 2 ramas distintas modifiquen la misma línea del código, este conflicto deberá ser gestionado manualmente.
+La rama activa pasará a ser una rama temporal con el nombre ```<rama activa>|MERGING``` para indicar que la operación ```git merge``` no se pudo completar.
+
+## Sintaxis de un conflicto
+
+```
+<<<<<<<< HEAD
+<línea en la rama actual>
+========
+<línea en la rama que se quiere fusionar>
+>>>>>>>> <rama que se quiere fusionar>
+```
+
+En los conflictos, ```<<<<<<<<``` indica el commit de la rama actual, ```>>>>>>>>``` indica el commit de la rama que se quiere fusionar y ```========``` actúa como un separador entre ambas versiones.
+
+## Revisar el estado de los conflictos
+
+```
+git status
+```
+
+El comando ```git status``` que se mencionó anteriormente también indica los conflictos solucionados y los no solucionados.
+
+## Solución de Conflictos
+
+Los conflictos deben solucionarse editando los archivos manualmente, decidiendo qué cambios se dejan.
+Se debe realizar un commit para confirmar la fusión, los cambios deben volver a añadirse usando ```git add```.
+Cuando se solucione el conflicto, la rama activa pasa de ser ```<rama activa>|MERGING``` a ```<rama activa>``` y la rama temporal se borra.
+
+## Cancelar una fusión en caso de conflictos
+
+```
+git merge --abort
+```
+
 ## Comparar 2 commits
 
 ```
@@ -764,6 +808,10 @@ git push <repositorio remoto 1> <rama 1> && git push <repositorio remoto 2> <ram
 ```
 git push origin :<rama>
 ```
+
+## Git Flow
+
+Git Flow es un programa distinto de Git, pero que funciona de manera muy similar.
 
 ## Iniciar repositorio Git Flow
 
