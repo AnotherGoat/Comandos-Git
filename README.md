@@ -739,6 +739,7 @@ ssh-add ~/.ssh/id_rsa
 ```
 
 Se debe añadir la clave privada, no la pública.
+Es importante crear una clave privada para cada equipo, NO SE DEBE MOVER NI MUCHO MENOS COPIAR DE UNO A OTRO.
 
 ## Recibir cambios desde el repositorio remoto
 
