@@ -26,14 +26,18 @@ git --version
 
 ## Conceptos importantes
 
-* Directorio de trabajo: Entorno de desarrollo personal, lo que se ve en el explorador de archivos, también conocidos como ```tracked```.
+* Directorio de trabajo: Entorno de desarrollo personal, lo que se ve en el explorador de archivos, también conocidos como ```untracked```.
 * Área de preparación o ```staging```: Espacio en la RAM donde se almacenan los archivos que rastrea Git, también conocidos como ```tracked```.
 Se añaden archivos a este espacio usando ```git add```.
 * Repositorio local: Archivos en la base de datos que se encuentra en la carpeta .git. Al usar ```git commit```, se mueven todos los cambios en ```staging``` al repositorio local.
 * Repositorio remoto: Repositorio almacenado en un servidor en internet.
-Se puede descagar como repositorio local usando ```git clone```.
+Se puede descargar como repositorio local usando ```git clone```.
 Los cambios del repositorio local se mueven a él usando ```git push```.
 Se pueden recibir los cambios usando ```git fetch``` + ```git merge``` o usando ```git pull```.
+
+* ```HEAD```: Es el lugar donde se está trabajando en el momento actual.
+* ```master```:
+* ```origin```: Es el nombre del repositorio remoto por defecto, que aparece al usar ```git clone```.
 
 ## Ver una pequeña introducción a Git
 
@@ -311,7 +315,7 @@ Esto inicia un menú para manejar los cambios.
 Existen 2 formas de hacerlo. No es necesario usar ```git add``` de antemano.
 
 ```
-git commit -a -m "<mensaje del commit>"
+git commit -am "<mensaje del commit>"
 ```
 
 ```
