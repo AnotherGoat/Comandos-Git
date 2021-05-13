@@ -197,7 +197,7 @@ git reset
 Estos cambios se marcarán como ```untracked```.
 
 
-## Remover un archivo específico del ```staging```
+## Remover un archivo específico del ```s ing```
 
 ```
 git reset <archivo>
@@ -335,6 +335,8 @@ En otras palabras, los archivos nuevos serán ignorados en este commit.
 ```
 git diff
 ```
+
+Para los archivos binarios sólo se indica que difieren, ya que las diferencias son incomprensibles comparadas con el texto plano.
 
 ## Ver los cambios en ```staged``` en detalle
 
@@ -578,6 +580,24 @@ git branch -r
 git push
 ```
 
+## Mostrar los cambios ocurridos en todas las ramas
+
+```
+git log --all
+```
+
+## Mostrar los cambios en todas las ramas junto a un gráfico
+
+```
+git log --all --graph
+```
+
+## Mostrar los cambios en todas las ramas junto a un gráfico decorado
+
+```
+git log --all --graph --decorate --oneline
+```
+
 ## Añadir una etiqueta
 
 ```
@@ -586,11 +606,25 @@ git tag <etiqueta> <hash del commit>
 
 Las etiquetas generalmente se usan para marcar versiones.
 
+## Añadir etiqueta con más detalles
+
+```
+git tag -a <etiqueta> -m "<mensaje>" <hash del commit>
+```
+
 ## Mostrar una lista de todas las etiquetas
 
 ```
 git tag
 ```
+
+## Mostrar las etiquetas y sus referencias
+
+```
+git show-ref --tags
+```
+
+Son distintas a las referencias del commit que marcan.
 
 ## Revisar el repositorio en el estado que tenía en una etiqueta
 
@@ -715,15 +749,16 @@ Se pedirá esta clave regularmente.
 ## Generar clave SSH manualmente
 
 Se debe ingresar a la carpeta home del usuario actual.
-
-```
-ssh-keygen -t rsa -b 4096 -C "<email>"
-```
-
-O en el caso general, se puede definir así.
+En caso de usar Windows, se recomienda hacer todo este proceso desde Git Bash.
 
 ```
 ssh-keygen -t <algoritmo> -b <grado de encriptación> -C "<email>"
+```
+
+En este ejemplo se usará el algoritmo de encriptación RSA.
+
+```
+ssh-keygen -t rsa -b 4096 -C "<email>"
 ```
 
 Después, pedirá la ubicación donde se guardará.
@@ -733,13 +768,29 @@ Una passphrase es una contraseña que acepta espacios dentro de ella.
 El archivo sin extensión es la llave privada y el archivo .pub es la llave pública.
 
 Después se debe añadir la llave, para que el sistema operativo la reconozca.
+El nombre del archivo varía dependiendo del método de encriptación empleado.
 
 ```
 ssh-add ~/.ssh/id_rsa
 ```
 
 Se debe añadir la clave privada, no la pública.
-Es importante crear una clave privada para cada equipo, NO SE DEBE MOVER NI MUCHO MENOS COPIAR DE UNO A OTRO.
+Es importante crear una clave privada para cada equipo y cada usuario.
+Importante: NO SE DEBE MOVER NI COPIAR DE UNO A OTRO.
+
+Copiar la llave pública SSH.
+
+```
+clip < ~/.ssh/id_rsa.pub
+```
+
+## Cambiar origen existente de un repositorio
+
+Se puede usar para pasar de HTTP a SSH o viceversa.
+
+```
+git remote set-url origin <url nueva>
+```
 
 ## Recibir cambios desde el repositorio remoto
 
@@ -794,6 +845,18 @@ git push --tags
 
 ```
 git push --all
+```
+
+## Borrar una etiqueta
+
+```
+git tag -d <etiqueta>
+```
+
+## Borrar una etiqueta del repositorio remoto
+
+```
+git push origin :refs/tags/<etiqueta>
 ```
 
 ## Revertir el repositorio local a un commit todavía no subido al repositorio remoto
@@ -872,6 +935,18 @@ git push -u <repositorio remoto> <rama>
 ```
 
 Esto permite usar ```git push``` para enviar todos los cambios que se hagan en el futuro, en vez de tener que escribir el repositorio y la rama otra vez.
+
+## Mostrar todas las ramas y su historia
+
+```
+git show-branch
+```
+
+## Mostrar todas las ramas y su historia, incluyendo las remotas
+
+```
+git show-branch --all
+```
 
 ## Git Flow
 
