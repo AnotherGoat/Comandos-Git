@@ -402,6 +402,32 @@ archivo.txt
 test
 ```
 
+También se puede usar el hash ```#``` para escribir comentarios en el .gitignore.
+
+```
+# Este es un comentario
+```
+
+Se puede utilizar el símbolo de exclamación ```!``` para indicar algo que no se debe ignorar dentro de un directorio ignorado.
+
+```
+content
+!content/README.md
+```
+
+Generalmente, se usa .gitignore para ignorar los siguientes tipos de archivos:
+
+* Documentos que no son de texto plano
+* Archivos binarios como imágenes, sonidos o videos
+* Archivos con contraseñas o llaves de APIs, SSH, etc
+* Configuraciones del entorno de ejecución
+* Archivos compilados o usados sólo durante el proceso de compilación
+* Archivos externos
+* Logs o trazas
+* Archivos que genera el sistema operativo
+* Archivos que pueden contener información personal
+* Archivos comprimidos como por ejemplo .zip, .tar.gz, .7z o .rar
+
 ## Borrar un archivo ```tracked``` del repositorio, sin removerlo del disco
 
 ```
@@ -1066,4 +1092,28 @@ git flow feature pull origin
 
 ```
 git flow feature finish -F <rama de característica>
+```
+
+## Recibir ramas de tipo bugfix
+
+```
+git flow bugfix pull origin
+```
+
+## Terminar una rama de bugfix y borrarla del repositorio remoto
+
+```
+git flow bugfix finish -F <rama de característica>
+```
+
+## Recibir ramas de tipo hotfix
+
+```
+git flow hotfix pull origin
+```
+
+## Terminar una rama de hotfix y borrarla del repositorio remoto
+
+```
+git flow hotfix finish -F <rama de característica>
 ```
