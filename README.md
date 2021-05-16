@@ -238,8 +238,8 @@ Se pedirá escribir el mensaje utilizando el editor Vim.
 ## Uso básico de Vim
 
 Para comenzar a escribir texto se debe pulsar Escape + I, con lo cual se cambia al modo ```INSERTAR```.
-Para salir de esta pantalla se debe pulsar Escape Shift Z Z, lo cual guarda el archivo y realiza el commit.
-Si se deja el mensaje del commit en blanco, se aborta.
+Para salir de esta pantalla se debe pulsar Escape, escribir ```:wq``` y pulsar Enter, lo cual guarda el archivo y realiza el commit.
+Si se deja el mensaje del commit en blanco, se aborta la realización del commit.
 
 ## Ver el historial de commits realizados
 
@@ -987,23 +987,6 @@ git show-branch
 git show-branch --all
 ```
 
-## Fusionar la historia de una rama directo con la rama final, como si nunca hubiera existido
-
-Esto cambia el commit de origen de la rama experimental por el último commit en la final.
-Básicamente, hace como que la rama experimental nunca existió y como que todos los cambios fueron realizados en la rama final.
-
-```
-git checkout <rama experimental>
-git rebase <rama final>
-git checkout <rama final>
-git rebase <rama experimental>
-```
-
-Esto es una muy mala práctica si se usa en repositorios remotos.
-Para cambios locales su uso es aceptable.
-En general, su uso debería ser muy limitado, como por ejemplo para experimentos pequeños.
-También se debe tomar en cuenta que esto modifica la historia, así que en un futuro puede parecer que el orden de los cambios realizados no tiene sentido.
-
 ## Guardar los cambios no almacenados en una memoria temporal
 
 ```
@@ -1213,3 +1196,29 @@ git flow hotfix pull origin
 ```
 git flow hotfix finish -F <rama de característica>
 ```
+
+## Fusionar la historia de una rama directo con la rama final, como si nunca hubiera existido
+
+Esto cambia el commit de origen de la rama experimental por el último commit en la final.
+Básicamente, hace como que la rama experimental nunca existió y como que todos los cambios fueron realizados en la rama final.
+
+```
+git checkout <rama experimental>
+git rebase <rama final>
+git checkout <rama final>
+git rebase <rama experimental>
+```
+
+Esto es una muy mala práctica si se usa en repositorios remotos.
+Para cambios locales su uso es aceptable.
+En general, su uso debería ser muy limitado, como por ejemplo para experimentos pequeños.
+También se debe tomar en cuenta que esto modifica la historia, así que en un futuro puede parecer que el orden de los cambios realizados no tiene sentido.
+
+## Traer un commit específico de otra rama
+
+```
+git cherry-pick <hash del commit>
+```
+
+Al momento de fusionar la rama con ```git merge```, podría aparecer algún conflicto, el cual debería ser fácil de solucionar en la mayoría de los casos.
+Sin embargo, cherry-pick es considerado como una mala práctica, ya que al utilizarlo se está alterando la historia del repositorio.
