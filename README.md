@@ -415,9 +415,16 @@ content
 !content/README.md
 ```
 
+También se puede utilizar el wildcard para aceptar todos los archivos que cumplan cierto patrón.
+El siguiente ejemplo ignora todos los archivos de extensión .png.
+
+```
+*.png
+```
+
 Generalmente, se usa .gitignore para ignorar los siguientes tipos de archivos:
 
-* Documentos que no son de texto plano
+* Documentos que no son escritos como texto plano
 * Archivos binarios como imágenes, sonidos o videos
 * Archivos con contraseñas o llaves de APIs, SSH, etc
 * Configuraciones del entorno de ejecución
@@ -427,6 +434,12 @@ Generalmente, se usa .gitignore para ignorar los siguientes tipos de archivos:
 * Archivos que genera el sistema operativo
 * Archivos que pueden contener información personal
 * Archivos comprimidos como por ejemplo .zip, .tar.gz, .7z o .rar
+
+## Añadir un archivo que está siendo ignorado por Git
+
+```
+git add -f <archivo>
+```
 
 ## Borrar un archivo ```tracked``` del repositorio, sin removerlo del disco
 
@@ -972,6 +985,89 @@ git show-branch
 
 ```
 git show-branch --all
+```
+
+## Fusionar la historia de una rama directo con la rama final, como si nunca hubiera existido
+
+Esto cambia el commit de origen de la rama experimental por el último commit en la final.
+Básicamente, hace como que la rama experimental nunca existió y como que todos los cambios fueron realizados en la rama final.
+
+```
+git checkout <rama experimental>
+git rebase <rama final>
+git checkout <rama final>
+git rebase <rama experimental>
+```
+
+Esto es una muy mala práctica si se usa en repositorios remotos.
+Para cambios locales su uso es aceptable.
+En general, su uso debería ser muy limitado, como por ejemplo para experimentos pequeños.
+También se debe tomar en cuenta que esto modifica la historia, así que en un futuro puede parecer que el orden de los cambios realizados no tiene sentido.
+
+## Guardar los cambios no almacenados en una memoria temporal
+
+```
+git stash
+```
+
+Los cambios se almacenarán como un WIP (work in progress).
+Esto permite revisar otras versiones del repositorio sin perder los cambios que se estaban realizando antes y sin necesidad de tener que guardarlos en un commit incompleto.
+
+## Ver lista de cambios temporales almacenados
+
+```
+git stash list
+```
+
+## Recuperar el stash
+
+```
+git checkout <rama donde se hizo el stash>
+git stash pop
+```
+
+Esto elimina el stash de la lista.
+
+## Recuperar el stash en una rama nueva
+
+```
+git stash branch <rama nueva>
+```
+
+Esto elimina el stash de la lista.
+
+## Eliminar el stash sin recuperarlo
+
+```
+git stash drop
+```
+
+Esto elimina el stash de la lista.
+
+## Limpiar archivos que Git puede indexar pero no ha almacenado
+
+```
+git clean
+```
+
+En realidad, este comando no hace nada, ya que es muy peligroso y por ese motivo requiere una confirmación.
+
+## Mostrar los archivos que se van a remover en la limpieza
+
+```
+git clean --dry-run
+```
+
+El comando ```git clean``` ignorará los siguientes archivos:
+* Las carpetas, sin importar que tengan archivos o no.
+* Los archivos que están en el ```.gitignore```.
+
+## Confirmar limpieza de los archivos
+
+Se recomienda revisar los archivos que se borrarán antes de utilizar este comando.
+
+```
+git clean -f
 ```
 
 ## Git Flow
