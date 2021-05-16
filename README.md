@@ -53,6 +53,12 @@ git help <comando>
 
 Esto abrirá la documentación sobre el comando en el navegador predefinido.
 
+## Otra forma de abrir la documentación sobre un comando
+
+```
+git <comando> --help
+```
+
 ## Hacer la configuración inicial
 
 Para poder realizar commits, Git necesita que su usuario registre su nombre y correo.
@@ -490,7 +496,14 @@ git branch
 
 La rama activa se mostrará en verde.
 
-## Ver lista de ramas, incluyendo las remotas
+
+## Ver la lista de ramas remotas
+
+```
+git branch -r
+```
+
+## Ver lista de todas las ramas, incluyendo las remotas
 
 ```
 git branch -a
@@ -1281,3 +1294,49 @@ git log -S "<palabra>"
 
 Muestra todos los commits donde se usó la palabra indicada.
 
+## Ver los commits que ha hecho cada miembro del equipo
+
+```
+git shortlog
+```
+
+## Ver sólo la cantidad de commits que ha hecho cada miembro del equipo
+
+```
+git shortlog -sn
+```
+
+## Ver la cantidad de commits que ha hecho cada miembro del equipo, incluyendo los borrados
+
+```
+git shortlog -sn --all
+```
+
+## Ver la cantidad de commits que ha hecho cada miembro del equipo, incluyendo los borrados e ignorando los merges
+
+```
+git shortlog -sn --all --no-merges
+```
+
+## Crear un comando de Git personalizado
+
+```
+git config --global alias.<alias> "<comando>"
+```
+
+Esto permite utilizar comandos largos escribiendo pocas palabras.
+Tanto el alias como el comando no deben incluir la palabra ```git``` que se usa para iniciar todos los comandos relacionados con Git.
+
+## Ver los cambios que hizo cada persona en un archivo, con un poco más de indentación
+
+```
+git blame -c <archivo>
+```
+
+## Ver los cambios que hizo cada una persona en una parte específica de un archivo
+
+```
+git blame -L<inicio>,<final> <archivo
+```
+
+Donde inicio y final son los números de línea límites de la sección que se quiere revisar.
