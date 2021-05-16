@@ -196,8 +196,7 @@ git reset
 
 Estos cambios se marcarán como ```untracked```.
 
-
-## Remover un archivo específico del ```s ing```
+## Remover un archivo específico del ```staging```
 
 ```
 git reset <archivo>
@@ -362,7 +361,7 @@ git reset --hard HEAD^
 git reset --hard HEAD^^
 ```
 
-## Añadir archivos al último commit
+## Añadir archivos al último commit y cambiar el mensaje
 
 ```
 git add <archivo>
@@ -370,6 +369,15 @@ git commit --amend -m "<mensaje nuevo>"
 ```
 
 El mensaje anterior se sobreescribirá.
+
+## Añadir archivos al último commit y editar el mensaje con Vim
+
+```
+git add <archivo>
+git commit --amend
+```
+
+Esto permite mantener el mensaje original o cambiarlo si se quiere.
 
 ## Ver el historial detallado de cambios de un archivo
 
@@ -1222,3 +1230,54 @@ git cherry-pick <hash del commit>
 
 Al momento de fusionar la rama con ```git merge```, podría aparecer algún conflicto, el cual debería ser fácil de solucionar en la mayoría de los casos.
 Sin embargo, cherry-pick es considerado como una mala práctica, ya que al utilizarlo se está alterando la historia del repositorio.
+
+## Ver un historial de todos los cambios realizados, incluyendo los HEADs
+
+```
+git reflog
+```
+
+Este comando es muy útil cuando por algún motivo todo el repositorio se arruinó y se quiere regresar a un estado anterior del repositorio completo.
+
+## Regresar a un estado anterior del repositorio
+
+```
+git reset --hard <hash del HEAD>
+```
+
+El hash del HEAD fue el que se obtuvo usando ```git reflog```.
+Se debe tener en cuenta que el uso de este comando es muy peligroso.
+El uso de este comando también se considera una mala práctica porque cambia la historia del repositorio.
+
+## Buscar en los archivos del repositorio
+
+```
+git grep "<palabra>"
+```
+
+Esto indica los archivos y el texto donde se encuentra la palabra.
+
+## Buscar los números de línea donde se encuentra una palabra
+
+```
+git grep -n "<palabra>"
+```
+
+Esto indica los archivos, los números de línea y el texto donde se encuentra la palabra.
+
+## Contar la cantidad de ocurrencias de una palabra
+
+```
+git grep -c "<palabra>"
+```
+
+Esto indica los archivos y la cantidad de veces que se usa la palabra en cada archivo.
+
+## Buscar una palabra en los commits
+
+```
+git log -S "<palabra>"
+```
+
+Muestra todos los commits donde se usó la palabra indicada.
+
